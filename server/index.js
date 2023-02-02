@@ -9,7 +9,7 @@ const db = require("./models");
 //Routers
 
 const postRouter = require("./routes/Posts")
-app.use("/posts", postRouter)
+app.use("/posts", postRouter) //all route handlers for requests that come to '/posts' routes  should be looked for in the  'postRouter'
 
 
 db.sequelize.sync().then(() => {
