@@ -1,0 +1,39 @@
+
+get http://localhost:3001/posts
+content-Type: application/json
+
+
+###
+
+post http://localhost:3001/posts
+content-Type: application/json
+
+{
+    "title":"example 4",
+    "postText":"bnvklvkl ksdkfdof",
+    "userNAme": "olia"
+}
+###
+
+
+get http://localhost:3000/api/v1/tasks/63c732025aaefb1a6471cf1b
+content-Type: application/json
+
+
+
+###
+
+patch http://localhost:3000/api/v1/tasks/63c732025aaefb1a6471cf1b
+content-Type: application/json
+
+{
+    "name": "shakeAndBake",
+    "completed": true
+}
+### 
+
+
+delete http://localhost:3000/api/v1/tasks/63c78cca093b1611bcd64b17
+content-Type: application/json
+
+###
