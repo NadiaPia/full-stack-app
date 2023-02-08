@@ -25,7 +25,7 @@ function CreatePost() {
     }
  
     return (
-    <div className='createPostPage'>      
+    <div className='createPostPage'>
         <Formik 
             initialValues={initialValues} 
             onSubmit={onSubmit} 
