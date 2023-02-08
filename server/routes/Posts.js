@@ -13,4 +13,10 @@ router.post("/", async (req, res) => {
     res.json(post)
 });
 
+router.get("/:id", async (req, res) => {
+    const id = req.params.id
+    const post = await Posts.findByPk(id) //find by primary key, that is id in column in db. This is the method of the sequilize
+    res.json(post)
+})
+
 module.exports = router;

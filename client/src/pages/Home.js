@@ -9,7 +9,9 @@ import { useNavigate } from 'react-router-dom';
 function Home() {
   
   const [listOfPosts, setListOfPosts] = useState([]);
+
   let navigate = useNavigate() //we have to call this useNavigate only once here via defining it as a variable
+  
   useEffect(() => {
     axios.get("http://localhost:3001/posts").then((response) => {
       setListOfPosts(response.data);      
