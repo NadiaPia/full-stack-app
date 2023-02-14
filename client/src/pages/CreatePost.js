@@ -20,6 +20,7 @@ function CreatePost() {
         userNAme: Yup.string().min(3).max(15).required(),
     })
 
+    //data is collected in Formik
     const onSubmit = (data) => {
         axios.post("http://localhost:3001/posts", data).then((response) => {
         navigate("/")

@@ -13,6 +13,8 @@ const db = require("./models");
 const postRouter = require("./routes/Posts")
 app.use("/posts", postRouter) //all route handlers for requests that come to '/posts' routes  should be looked for in the  'postRouter'
 
+const commentsRouter = require("./routes/Comments")
+app.use("/comments", commentsRouter)
 
 db.sequelize.sync().then(() => {
     app.listen(3001, () => {

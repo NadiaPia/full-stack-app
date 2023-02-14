@@ -19,9 +19,23 @@ content-Type: application/json
 get http://localhost:3001/posts/3
 content-Type: application/json
 
+### 
+get http://localhost:3001/comments/5
+content-Type: application/json
 
+### 
 
-###
+post http://localhost:3001/comments
+content-Type: application/json
+
+{
+    "commentBody":"the first comment",
+    "PostId": 2
+   
+}
+
+### 
+
 
 patch http://localhost:3000/api/v1/tasks/63c732025aaefb1a6471cf1b
 content-Type: application/json
