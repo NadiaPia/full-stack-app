@@ -29,7 +29,7 @@ post http://localhost:3001/comments
 content-Type: application/json
 
 {
-    "commentBody":"the first comment",
+    "commentBody":"what a great post!",
     "PostId": 2
    
 }
