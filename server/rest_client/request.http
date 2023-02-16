@@ -34,8 +34,30 @@ content-Type: application/json
    
 }
 
-### 
+### register user
 
+post http://localhost:3001/auth
+content-Type: application/json
+
+{
+    "username":"Nadia",
+    "password": "1234"
+   
+}
+
+### login user
+
+post http://localhost:3001/auth/login
+content-Type: application/json
+
+{
+   "username":"Nadia",
+    "password": "1234"
+   
+}
+
+
+### 
 
 patch http://localhost:3000/api/v1/tasks/63c732025aaefb1a6471cf1b
 content-Type: application/json
