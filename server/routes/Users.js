@@ -21,8 +21,8 @@ router.post("/", async (req, res) => {
 //request and check whether we have therm in our database
 
 router.post("/login", async(req, res) => {
-    const {username, password} = req.body //the same as const .......password = req.body.password.....
-    const user = await Users.findOne({where: {userNAme: username}});
+    const {userNAme, password} = req.body //the same as const .......password = req.body.password.....
+    const user = await Users.findOne({where: {userNAme: userNAme}});
     if(!user) res.json({error: "User doesn't Exist"}); //if user exist, let's check the password:
 
     //we cannot unhash user.password(password from the db,
