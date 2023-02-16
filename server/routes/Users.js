@@ -7,10 +7,10 @@ const bcrypt = require('bcrypt');
 //request and put thm in the db
 
 router.post("/", async (req, res) => {
-    const {username, password} = req.body //the same as const .......password = req.body.password.....
+    const {userNAme, password} = req.body //the same as const .......password = req.body.password.....
     bcrypt.hash(password, 10).then((hash) => {
         Users.create({                   //here we say our models to add new user to our db
-            userNAme: username,
+            userNAme: userNAme,
             password: hash,             //because we alredy hashed our password
         })
         res.json("Success")

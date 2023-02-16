@@ -40,8 +40,8 @@ post http://localhost:3001/auth
 content-Type: application/json
 
 {
-    "username":"Nadia",
-    "password": "1234"
+    "userNAme":"Zina",
+    "password": "Korzina"
    
 }
 
@@ -51,7 +51,7 @@ post http://localhost:3001/auth/login
 content-Type: application/json
 
 {
-   "username":"Nadia",
+    "username":"Nadia",
     "password": "1234"
    
 }
