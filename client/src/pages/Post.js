@@ -29,10 +29,26 @@ function Post() {
       }, []);
 
       const addComment = () => {
-        axios.post("http://localhost:3001/comments", {commentBody: newComment, PostId: id}).then((response) => {
-            const commentToAdd = { commentBody: newComment }; //each comment is an object, containing commentBody and a PostId, and here, we need only commentBody
-            setComments([...comments, commentToAdd]); //it makes a new post added automatically, but not after refresh
-            setNewComment("")
+        axios
+            .post("http://localhost:3001/comments", {
+                commentBody: newComment, 
+                PostId: id
+            }, 
+            {
+                headers: {
+                    accessToken: sessionStorage.getItem("accessTokenn")          //accessToken the same name as in the server in the middleware const accessToken
+
+                }
+            } 
+            )
+            .then((response) => {
+                if (response.data.error) {
+                    alert(response.data.error);
+                } else {
+                    const commentToAdd = { commentBody: newComment }; //each comment is an object, containing commentBody and a PostId, and here, we need only commentBody
+                    setComments([...comments, commentToAdd]); //it makes a new post added automatically, but not after refresh
+                    setNewComment("")
+                }
 
         })
       }

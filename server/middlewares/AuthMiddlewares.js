@@ -4,7 +4,7 @@ const {verify} = require("jsonwebtoken"); //this function will clarify the corre
 const validateToken = (req, res, next) => {        //next() //meens we want to move forward
     
     const accessToken = req.header("accessToken") //req.header("accessToken")should have a value of the actual sessionStorage
-    if (accessToken) return res.json({error: "User not logged in!"});
+    if (!accessToken) return res.json({error: "User not logged in!"});
 
     try {
         const validToken = verify(accessToken, "importantsecret") //verify is the func from jsonwebtoken library it  will clarify the correct data
