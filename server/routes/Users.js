@@ -3,6 +3,8 @@ const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require('bcrypt');
 
+const {sign} = require('jsonwebtoken');  //sign is a function to generate webtoken
+
 //Registration. Here we need grab the req.body.username and req.body.password from the 
 //request and put thm in the db
 
@@ -29,8 +31,15 @@ router.post("/login", async(req, res) => {
     //we only can hash password from the request(req.body.password) and compare them)
     bcrypt.compare(password, user.password).then((match) => {
         if(!match) res.json({error: "Wrong Username and Password combination"});
-        res.json("YOU LOGGED IN!!!")
+
+        //if user exists and his username and password is a correct combination we want to generate webtoken:
+        const accessToken = sign({userName: user.userName, id: user.id}, "importantsecret") //the argument is the data that we need to keep sequre and a secret
+        //the webtoken is gonna to hash this data
+        res.json(accessToken)   //sent it to the FE to have an access in the FE
     }) 
+
+    
+
     
 
 })
