@@ -16,7 +16,7 @@ function Login() {
               alert(response.data.error) //if res.json from the server contains error message              
             } else {
               sessionStorage.setItem("accessTokenn", response.data ) //look at inspect -> Application -> session storage
-            }
+            } 
         })
     }
   return (
