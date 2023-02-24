@@ -29,7 +29,7 @@ function Post() {
             },
                 {
                     headers: {
-                        accessToken: sessionStorage.getItem("accessTokenn")          //accessToken the same name as in the server in the middleware const accessToken
+                        accessToken: localStorage.getItem("accessTokenn")          //accessToken the same name as in the server in the middleware const accessToken
                     }
                 }
             )
@@ -37,7 +37,10 @@ function Post() {
                 if (response.data.error) {
                     alert(response.data.error);
                 } else {
-                    const commentToAdd = { commentBody: newComment, username: response.data.username, }; //each comment is an object, containing commentBody and a PostId, and here, we need only commentBody
+                    const commentToAdd = { 
+                        commentBody: newComment, 
+                        username: response.data.username, //we put username into the response in server side 
+                     }; //each comment is an object, containing commentBody and a PostId, and here, we need only commentBody
                     setComments([...comments, commentToAdd]); //it makes a new post added automatically, but not after refresh
                     setNewComment("")
                 }

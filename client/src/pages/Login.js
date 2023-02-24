@@ -20,7 +20,7 @@ function Login() {
             if(response.data.error) {
               alert(response.data.error) //if res.json from the server contains error message              
             } else {
-              sessionStorage.setItem("accessTokenn", response.data ) //look at inspect -> Application -> session storage
+              localStorage.setItem("accessTokenn", response.data ) //look at inspect -> Application -> session storage
               navigate("/")
             } 
         })
