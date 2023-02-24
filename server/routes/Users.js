@@ -33,7 +33,7 @@ router.post("/login", async(req, res) => {
         if(!match) res.json({error: "Wrong Username and Password combination"});
 
         //if user exists and his username and password is a correct combination we want to generate webtoken:
-        const accessToken = sign({userName: user.userName, id: user.id}, "importantsecret") //the argument is the data that we need to keep sequre and a secret
+        const accessToken = sign({userName: user.userNAme, id: user.id}, "importantsecret") //the argument is the data that we need to keep sequre and a secret
         //the webtoken is gonna to hash this data
         res.json(accessToken)   //sent it to the FE to have an access in the FE
     }) 
