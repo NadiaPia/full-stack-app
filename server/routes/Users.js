@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require('bcrypt');
+const {validateToken} = require("../middlewares/AuthMiddlewares")
 
 const {sign} = require('jsonwebtoken');  //sign is a function to generate webtoken
 
@@ -36,13 +37,13 @@ router.post("/login", async(req, res) => {
         const accessToken = sign({userName: user.userNAme, id: user.id}, "importantsecret") //the argument is the data that we need to keep sequre and a secret
         //the webtoken is gonna to hash this data
         res.json(accessToken)   //sent it to the FE to have an access in the FE
-    }) 
-
-    
-
-    
+    })    
 
 })
+
+router.get("/auth", validateToken, (req, res) => {
+    res.json(req.user);
+});
 
 
 module.exports = router;

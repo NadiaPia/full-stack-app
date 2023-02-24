@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import { AuthContext } from './helpers/AuthContext';
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 
@@ -14,10 +15,20 @@ function App() {
 
   const [authState, setAuthState] = useState(false);
 
-  useEffect(() => {                                //we have to rerender the page at first as authState is false by default
-    if(localStorage.getItem("accessTokenn")) {
-      setAuthState(true);
-    }
+  useEffect(() => {        //we have to rerender the page at first as authState is false by default
+    axios.get("http://localhost:3001/auth/auth", {
+      headers: { //as on the server side we use validateToken middleware we need send this info in the headers 
+        accessToken: localStorage.getItem("accessTokenn"),
+      },
+    })
+    .then((response) => { //we add this end point to the server to check and avoid fake data of the accessTokent in the localStorage
+      if(response.data.error) {
+        setAuthState(false);
+      } else {
+        setAuthState(true);
+      }
+    })
+    
 
   }, [])
   return (
