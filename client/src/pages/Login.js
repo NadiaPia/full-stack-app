@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react'; //useContext hook -is for access our context variable (authState)
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../helpers/AuthContext';
 
 
 
@@ -8,9 +9,10 @@ function Login() {
 
     let navigate = useNavigate();
 
-
     const [username, setUserName] = useState("");
     const [password, setPasswordName] = useState("");
+    const {setAuthState} = useContext(AuthContext)  // take setAuthState function from the AuthContext. //to access the function that change state  for our authState
+
 
 
     const login = () => {
@@ -21,6 +23,7 @@ function Login() {
               alert(response.data.error) //if res.json from the server contains error message              
             } else {
               localStorage.setItem("accessTokenn", response.data ) //look at inspect -> Application -> session storage
+              setAuthState(true)
               navigate("/")
             } 
         })

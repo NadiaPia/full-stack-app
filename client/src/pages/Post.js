@@ -29,7 +29,7 @@ function Post() {
             },
                 {
                     headers: {
-                        accessToken: localStorage.getItem("accessTokenn")          //accessToken the same name as in the server in the middleware const accessToken
+                        accessToken: localStorage.getItem("accessTokenn")   //accessToken the same name as in the server in the middleware const accessToken
                     }
                 }
             )
@@ -76,10 +76,8 @@ function Post() {
                             {comment.commentBody}
                             <label>Username: {comment.username}</label>
                             </div>
-
                     })}
                 </div>
-
             </div>
         </div>
     )
