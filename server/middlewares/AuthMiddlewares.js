@@ -8,7 +8,7 @@ const validateToken = (req, res, next) => {        //next() //meens we want to m
 
     try {
         const validToken = verify(accessToken, "importantsecret") //verify is the func from jsonwebtoken library it  will clarify the correct data
-        console.log("validTokenvalidTokenvalidTokenvalidToken", validToken)
+        //console.log("validTokenvalidTokenvalidTokenvalidToken", validToken)
         req.user = validToken; //push a new key to our req: as we unhashed accessToken that came from the FE now we have username and userid and we can now put it inside our request and now our req contains commentBody{}, header{}, user{}
         if (validToken) {
                 return next();

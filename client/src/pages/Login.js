@@ -20,10 +20,10 @@ function Login() {
         axios.post("http://localhost:3001/auth/login", data).then((response) => {
             //console.log(response.data)
             if(response.data.error) {
-              alert(response.data.error) //if res.json from the server contains error message              
+              alert(response.data.error) //if res.json from the server contains error message   
             } else {
-              localStorage.setItem("accessTokenn", response.data ) //look at inspect -> Application -> session storage
-              setAuthState(true)
+              localStorage.setItem("accessTokenn", response.data.token ) //look at inspect -> Application -> session storage
+              setAuthState({userName: response.data.userName, id: response.data.id, status: true}) //we don't have the acces to the username and the id here as this request doesn't go through the validateToken middleware
               navigate("/")
             } 
         })

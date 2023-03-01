@@ -13,7 +13,7 @@ import axios from "axios";
 
 function App() {
 
-  const [authState, setAuthState] = useState(false);
+  const [authState, setAuthState] = useState({userName: "", id: 0, status: false}); 
 
   useEffect(() => {        //we have to rerender the page at first as authState is false by default
     axios.get("http://localhost:3001/auth/auth", {
@@ -23,9 +23,9 @@ function App() {
     })
     .then((response) => { //we add this end point to the server to check and avoid fake data of the accessTokent in the localStorage
       if(response.data.error) {
-        setAuthState(false);
+        setAuthState({...authState, status: false});
       } else {
-        setAuthState(true);
+        setAuthState({userName: response.data.userName, id: response.data.id, status: true});
       }
     })
     
@@ -34,7 +34,7 @@ function App() {
 
   const logout = () => {
     localStorage.removeItem("accessTokenn") //we removed the Tokent> BUT!!!! it will not show any chages in our navbar: logout button will not be replaced with the Login/registration => we need change our state:
-    setAuthState(false) //it will rerender the page
+    setAuthState({userName: "", id: 0, status: false}) //it will rerender the page
   }
 
   return (
@@ -44,7 +44,7 @@ function App() {
       <div className="navbar">
         <Link to="/createpost">Create A Post</Link>
         <Link to="/">Home Page</Link>
-        {!authState ? (
+        {!authState.status ? (
         <>
         <Link to="/login">Login</Link>
         <Link to="/registration">Registration</Link>
@@ -53,7 +53,7 @@ function App() {
           <button onClick = {logout}> Logout </button>
         )
         }
-        
+        <h1>{authState.userName}</h1>
       </div>
 
       <Routes>
