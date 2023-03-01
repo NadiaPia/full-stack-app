@@ -37,7 +37,7 @@ router.post("/login", async(req, res) => {
         const accessToken = sign({userName: user.userNAme, id: user.id}, "importantsecret") //the argument is the data that we need to keep sequre and a secret
         //the webtoken is gonna to hash this data
         res.json(accessToken)   //sent it to the FE to have an access in the FE
-    })    
+    })
 
 })
 

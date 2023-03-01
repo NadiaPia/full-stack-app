@@ -30,7 +30,13 @@ function App() {
     })
     
 
-  }, [])
+  }, []);
+
+  const logout = () => {
+    localStorage.removeItem("accessTokenn") //we removed the Tokent> BUT!!!! it will not show any chages in our navbar: logout button will not be replaced with the Login/registration => we need change our state:
+    setAuthState(false) //it will rerender the page
+  }
+
   return (
     <div className="App">
       <AuthContext.Provider value={{authState, setAuthState}}>
@@ -38,11 +44,13 @@ function App() {
       <div className="navbar">
         <Link to="/createpost">Create A Post</Link>
         <Link to="/">Home Page</Link>
-        {!authState && (
+        {!authState ? (
         <>
         <Link to="/login">Login</Link>
         <Link to="/registration">Registration</Link>
         </>
+        ) : (
+          <button onClick = {logout}> Logout </button>
         )
         }
         
