@@ -23,6 +23,17 @@ router.post("/", validateToken, async (req, res) => {
     res.json(comment)
 });
 
+router.delete("/:commentID", validateToken, async (req, res) => {  //validateToken is needed here to allow the only owner of the comment delete their comment
+    const commentID = req.params.commentID;
+
+    Comments.destroy({
+        where: {
+            id: commentID,
+        },
+            
+    });
+});
+
 
 
 module.exports = router;

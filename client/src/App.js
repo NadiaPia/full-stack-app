@@ -6,7 +6,7 @@ import Post from "./pages/Post";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import { AuthContext } from './helpers/AuthContext';
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import axios from "axios";
 
 

@@ -1,7 +1,9 @@
 import React from 'react';
-import { useEffect, useState } from "react" //useEffect will allow to run a function immediately when
+import { useEffect, useState, useContext } from "react" //useEffect will allow to run a function immediately when
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../helpers/AuthContext';
+
 
 function Post() {
 
@@ -9,6 +11,7 @@ function Post() {
     const [postObject, setPostObject] = useState({});
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState([]);
+    const {authState} = useContext(AuthContext)
 
     useEffect(() => {
         axios.get(`http://localhost:3001/posts/${id}`).then((response) => {
@@ -47,6 +50,16 @@ function Post() {
             })
     }
 
+    const deleteComment = (id) => {
+        axios.delete(`http://localhost:3001/comments/${id}`, {
+            headers: {
+            accessToken: localStorage.getItem("accessTokenn")},
+        }). then(() => {
+            alert("token deleted")
+        })
+
+    }
+
     return (
         <div className="postPage" >
             <div className="leftSide">
@@ -75,6 +88,8 @@ function Post() {
                         return <div key={key} className="comment">
                             {comment.commentBody}
                             <label>Username: {comment.username}</label>
+                            {authState.userName === comment.username && 
+                            <button onClick={() => {deleteComment(comment.id)}}>X</button>} 
                             </div>
                     })}
                 </div>
