@@ -13,7 +13,7 @@ import axios from "axios";
 
 function App() {
 
-  const [authState, setAuthState] = useState({userName: "", id: 0, status: false}); 
+  const [authState, setAuthState] = useState({userName: "", id: 0, status: false});
 
   useEffect(() => {        //we have to rerender the page at first as authState is false by default
     axios.get("http://localhost:3001/auth/auth", {
@@ -27,8 +27,7 @@ function App() {
       } else {
         setAuthState({userName: response.data.userName, id: response.data.id, status: true});
       }
-    })
-    
+    })   
 
   }, []);
 

@@ -40,6 +40,7 @@ function Post() {
                 if (response.data.error) {
                     alert(response.data.error);
                 } else {
+                    console.log(response.data)
                     const commentToAdd = { 
                         commentBody: newComment, 
                         username: response.data.username, //we put username into the response in server side 
@@ -51,12 +52,13 @@ function Post() {
     }
 
     const deleteComment = (id) => {
-        axios.delete(`http://localhost:3001/comments/${id}`, {
-            headers: {
-            accessToken: localStorage.getItem("accessTokenn")},
+        axios.delete (`http://localhost:3001/comments/${id}`, {
+            headers: { accessToken: localStorage.getItem("accessTokenn")},
         }). then(() => {
-            alert("token deleted")
-        })
+            setComments(comments.filter((val) => {
+                return val.id !== id;
+            }));
+        });
 
     }
 
