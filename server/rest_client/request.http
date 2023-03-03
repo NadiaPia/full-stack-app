@@ -50,26 +50,20 @@ content-Type: application/json
 post http://localhost:3001/auth/login
 content-Type: application/json
 
+
 {
     "userNAme":"Rosa",
-    "password": "Smoroza"
-   
+    "password": "Smoroza"   
 }
-
 
 ### 
 
-patch http://localhost:3000/api/v1/tasks/63c732025aaefb1a6471cf1b
+post http://localhost:3001/likes
 content-Type: application/json
+accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRvbGlhIiwiaWQiOjE2LCJpYXQiOjE2Nzc2NTgyNDh9.abQO5uFG3scEGpyvtYRVD4e1GLMagngBGwcEpvCWmA4
 
-{
-    "name": "shakeAndBake",
-    "completed": true
+{   
+    "PostId": 1   
 }
+
 ### 
-
-
-delete http://localhost:3000/api/v1/tasks/63c78cca093b1611bcd64b17
-content-Type: application/json
-
-###

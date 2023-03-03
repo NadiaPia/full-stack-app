@@ -56,7 +56,7 @@ function Post() {
             headers: { accessToken: localStorage.getItem("accessTokenn")},
         }). then(() => {
             setComments(comments.filter((val) => {
-                return val.id !== id;
+                return val.id !== id; //
             }));
         });
 
@@ -90,8 +90,7 @@ function Post() {
                         return <div key={key} className="comment">
                             {comment.commentBody}
                             <label>Username: {comment.username}</label>
-                            {authState.userName === comment.username && 
-                            <button onClick={() => {deleteComment(comment.id)}}>X</button>} 
+                            {authState.userName === comment.username &&  <button onClick={() => {deleteComment(comment.id)}}>X</button>} {/*we know the "comment.id" from the comment(map) and we pass it as an argument to this function */}
                             </div>
                     })}
                 </div>

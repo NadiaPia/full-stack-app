@@ -21,6 +21,13 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: "cascade",  //if we delete a post, all comments of it should be deleted as well
         });
     };
+    //That meens in the Comments table will appear one more column PostID
+
+    Posts.associate = (models) => {
+        Posts.hasMany(models.Likes, {
+            onDelete: "cascade",  
+        });
+    };
 
     return Posts;
 } 
