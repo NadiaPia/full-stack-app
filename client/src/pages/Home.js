@@ -44,6 +44,7 @@ function Home() {
           <div className="footer">
              {value.userNAme}
              <button onClick={() => {likeAPost(value.id)}}>Like</button>
+             <label>{value.Likes.length}</label> {/*because we have an access to the likes data as we joined Posts and Likes table, see at server -> Posts.js -> router.get...{inclede: [Likes]} */}
           </div>
         </div>
       );
