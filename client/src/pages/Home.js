@@ -26,7 +26,20 @@ function Home() {
       {headers: {accessToken: localStorage.getItem("accessTokenn")}}
       )
       .then((response) => {
-        alert(response.data)
+        
+        setListOfPosts(listOfPosts.map((post) => {
+          if(post.id === postId) {
+            if (response.data.liked) {              
+              return {...post, Likes: [...post.Likes, 0]} //we change the Likes field by adding 0 to the end of the Liakes array
+            } else {
+              const likesArray = post.Likes
+              likesArray.pop() //delete the last element
+              return {...post, Likes: likesArray}
+            }
+          } else {
+            return post;
+          }
+        }))
       })
 
   };
