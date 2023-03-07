@@ -19,15 +19,32 @@ function Home() {
 
   }, []);
 
+  const likeAPost = (postId) => {
+    axios.post(
+      "http://localhost:3001/likes", 
+      {PostId: postId}, 
+      {headers: {accessToken: localStorage.getItem("accessTokenn")}}
+      )
+      .then((response) => {
+        alert(response.data)
+      })
+
+  };
+
+
+
   return (
     <div>
       {listOfPosts.map((value, key) => {
       return (
-        <div className="post" key={key} onClick={() => {navigate(`/post/${value.id}`)}}>                                                 {/*we add onClick ivent on every post in order to get a data from them */}
+        <div className="post" key={key}>                                                 {/*we add onClick ivent on every post in order to get a data from them */}
           <div className="title"> {value.title} </div>
           <div className="id"> {value.id} </div>                   {/*is crated automaticaly in the db in the 1st column */}
-          <div className="body"> {value.postText} </div>
-          <div className="footer"> {value.userNAme} </div>
+          <div className="body" onClick={() => {navigate(`/post/${value.id}`)}}> {value.postText} </div>
+          <div className="footer">
+             {value.userNAme}
+             <button onClick={() => {likeAPost(value.id)}}>Like</button>
+          </div>
         </div>
       );
       })} 
