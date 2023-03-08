@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { Posts, Likes } = require("../models")
+const { Posts, Likes } = require("../models");
+const {validateToken} = require("../middlewares/AuthMiddlewares");
 
-router.get("/", async (req, res) => {   //(router.get("/)   ...express see this as "/posts"
+
+router.get("/", validateToken, async (req, res) => {   //(router.get("/)   ...express see this as "/posts"
     const listOfPosts = await Posts.findAll({ include: [Likes] });
-    res.json(listOfPosts)
+    const likedPosts = await Likes.findAll({where: { UserId: req.user.id }})  //will return likes that were done by particular user to know whether he already liked the post that he is going to like
+    res.json({listOfPosts: listOfPosts, likedPosts: likedPosts});
 })
 
 router.post("/", async (req, res) => {
