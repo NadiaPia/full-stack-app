@@ -1,30 +1,37 @@
 import React from 'react'
 import axios from 'axios';
-import { useEffect, useState } from "react" //useEffect will allow to run a function immediately when 
+import { useEffect, useState, useContext } from "react" //useEffect will allow to run a function immediately when 
 //the page reranders (when we open a webpage we can see all posps right away in it)
                                 
 import { useNavigate } from 'react-router-dom';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { AuthContext } from '../helpers/AuthContext';
+
 
 
 function Home() {
   
   const [listOfPosts, setListOfPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
-
-
+  const {authState} = useContext(AuthContext)
+  
   let navigate = useNavigate() //we have to call this useNavigate only once here via defining it as a variable
   
   useEffect(() => {
-    axios.get("http://localhost:3001/posts", {headers: {accessToken: localStorage.getItem("accessTokenn")}}).then((response) => {
-      setListOfPosts(response.data.listOfPosts);
-      setLikedPosts(
-        response.data.likedPosts.map((like) => {
-          return like.PostId
-        }) ); //now we have the list of likes(that containes the id of Posts) that were done by the particular user
-      //console.log("response.data.likedPosts", response.data.likedPosts) //Array(2){id: 17, createdAt: '2023-03-07T01:11:14.000Z', updatedAt: '2023-03-07T01:11:14.000Z', PostId: 2, UserId: 18}
+    if (!authState.status) {
+      navigate("/login")
+    } else {
 
-    }) 
+      axios.get("http://localhost:3001/posts", {headers: {accessToken: localStorage.getItem("accessTokenn")}}).then((response) => {
+        setListOfPosts(response.data.listOfPosts);
+        setLikedPosts(
+          response.data.likedPosts.map((like) => {
+            return like.PostId
+          }) ); //now we have the list of likes(that containes the id of Posts) that were done by the particular user
+        //console.log("response.data.likedPosts", response.data.likedPosts) //Array(2){id: 17, createdAt: '2023-03-07T01:11:14.000Z', updatedAt: '2023-03-07T01:11:14.000Z', PostId: 2, UserId: 18}
+  
+      }) 
+    }
 
   }, []);
 
