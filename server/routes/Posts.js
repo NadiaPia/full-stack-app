@@ -10,8 +10,9 @@ router.get("/", validateToken, async (req, res) => {   //(router.get("/)   ...ex
     res.json({listOfPosts: listOfPosts, likedPosts: likedPosts});
 })
 
-router.post("/", async (req, res) => {
-    const post = req.body;     //post.title; post.postText; post.userNAme
+router.post("/", validateToken, async (req, res) => {
+    const post = req.body;     //post.title; post.postText;  //post.userNAme -  we don't have it in req.body any more   
+    post.userNAme = req.user.userName
     await Posts.create(post);  //we call sequelize function to create post by inserting this data to our dbtable
     res.json(post)
 });

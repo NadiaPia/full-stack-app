@@ -21,19 +21,17 @@ function CreatePost() {
 
     const initialValues = {
         title: "",
-        postText: "",
-        userNAme: "",
+        postText: "",       
     };
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(),
-        postText: Yup.string().required(),
-        userNAme: Yup.string().min(3).max(15).required(),
+        postText: Yup.string().required(),       
     })
 
     //data is collected in Formik
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001/posts", data).then((response) => {
+        axios.post("http://localhost:3001/posts", data, {headers: {accessToken: localStorage.getItem("accessTokenn")}}).then((response) => {
         navigate("/")
       
     }) 
@@ -65,15 +63,7 @@ function CreatePost() {
                     name="postText" 
                     placeholder="text..."
                 />
-
-                <label>UserName: </label>
-                <ErrorMessage name="userNAme" component="span"/> {/*name="userNAme", "userNAme" the same spelling as on db */}
-                <Field 
-                    autoComplete="off"
-                    id="inputCreatePost" 
-                    name="userNAme" 
-                    placeholder="ex.John123..."
-                />
+                
                 <button type="submit">Create Post</button>
             </Form>
 
