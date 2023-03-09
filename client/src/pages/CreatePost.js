@@ -11,7 +11,7 @@ function CreatePost() {
     const {authState} = useContext(AuthContext);
 
     useEffect(() => {
-        if (!authState.status) {
+        if (!localStorage.getItem("accessTokenn")) //{ if(!authState) needs time to get the response about status after refresh this page => it will redirect to the login page in this case even though the user is logged in
             navigate("/login")
           } 
 

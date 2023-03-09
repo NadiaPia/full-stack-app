@@ -18,7 +18,7 @@ function Home() {
   let navigate = useNavigate() //we have to call this useNavigate only once here via defining it as a variable
   
   useEffect(() => {
-    if (!authState.status) {
+    if (!localStorage.getItem("accessTokenn")) { //{ if(!authState) needs time to get the response about status after refresh this page => it will redirect to the login page in this case even though the user is logged in
       navigate("/login")
     } else {
 
