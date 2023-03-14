@@ -72,3 +72,8 @@ get http://localhost:3001/auth/basicinfo/18
 content-Type: application/json
 
 ### 
+
+get http://localhost:3001/posts/byuserId/18
+content-Type: application/json
+
+### 

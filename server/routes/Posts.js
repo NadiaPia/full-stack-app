@@ -12,7 +12,8 @@ router.get("/", validateToken, async (req, res) => {   //(router.get("/)   ...ex
 
 router.post("/", validateToken, async (req, res) => {
     const post = req.body;     //post.title; post.postText;  //post.userNAme -  we don't have it in req.body any more   
-    post.userNAme = req.user.userName
+    post.userNAme = req.user.userName;
+    post.UserId = req.user.id;
     await Posts.create(post);  //we call sequelize function to create post by inserting this data to our dbtable
     res.json(post)
 });
@@ -21,6 +22,12 @@ router.get("/:id", async (req, res) => {
     const id = req.params.id
     const post = await Posts.findByPk(id) //find by primary key, that is id in column in db. This is the method of the sequilize
     res.json(post)
+})
+
+router.get("/byuserId/:id", async (req, res) => {
+    const id = req.params.id
+    const listOfPosts = await Posts.findAll({where: {UserId: id}, include: [Likes], }) 
+    res.json(listOfPosts)
 })
 
 router.delete("/:postId", validateToken, async(req,res) => {
