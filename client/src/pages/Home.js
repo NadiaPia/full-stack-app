@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState, useContext } from "react" //useEffect will allow to run a function immediately when 
 //the page reranders (when we open a webpage we can see all posps right away in it)
                                 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { AuthContext } from '../helpers/AuthContext';
 
@@ -76,11 +76,12 @@ function Home() {
         <div className="post" key={key}>   {/*we add onClick ivent on every post in order to get a data from them */}
           <div className="title"> {value.title} </div>
           <div className="id"> {value.id} </div>     {/*is crated automaticaly in the db in the 1st column */}
-          <div className="body" onClick={() => {navigate(`/post/${value.id}`)}}> {value.postText} </div>
-          
+          <div className="body" onClick={() => {navigate(`/post/${value.id}`)}}> {value.postText} </div>       
           
           <div className="footer">
-            <div className="username">{value.userNAme}</div>
+            <div className="username">
+              <Link to={`/profile/${value.UserId}`}>{value.userNAme}</Link>
+            </div>
 
             <div className="buttons">              
               <ThumbUpIcon onClick={() => {likeAPost(value.id)}}
@@ -89,9 +90,6 @@ function Home() {
               <label>{value.Likes.length}</label> {/*because we have an access to the likes data as we joined Posts and  Likes table, see at server -> Posts.js -> router.get...{inclede: [Likes]} */}
             </div>
           </div>
-
-
-
 
         </div>
       );
