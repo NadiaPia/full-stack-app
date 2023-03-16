@@ -18,6 +18,31 @@ router.post("/", validateToken, async (req, res) => {
     res.json(post)
 });
 
+
+
+
+
+
+
+
+router.put("/title", validateToken, async (req, res) => {
+    const { newTitle, id } = req.body;
+    await Posts.update({title: newTitle}, {where: {id: id}});
+    res.json(newTitle)
+});
+
+
+router.put("/postText", validateToken, async (req, res) => {
+    const { newText, id } = req.body;
+    await Posts.update({postText: newText}, {where: {id: id}});
+    res.json(newText)
+});
+
+
+
+
+
+
 router.get("/:id", async (req, res) => {
     const id = req.params.id
     const post = await Posts.findByPk(id) //find by primary key, that is id in column in db. This is the method of the sequilize
