@@ -88,7 +88,7 @@ function Post() {
             setPostObject({...postObject, title: newTitle});
         } else {
             let newPostText = prompt("Enter New Text");
-            axios.put(`http://localhost:3001/posts/postText`, {
+            axios.put("http://localhost:3001/posts/postText", {
                 newText: newPostText, 
                 id: id
             }, 

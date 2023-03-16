@@ -29,7 +29,7 @@ function Profile() {
     <div className="profilePageContainer">
       <div className="basicInfo">
         <h1>Username: {userName}</h1>
-        {authState.userName === userName && <button>Change My Password</button>}
+        {authState.userName === userName && <button onClick={() => {navigate(`/changepassword`)}}>Change My Password</button>}
       </div>
 
       <div className="listOfPosts">
